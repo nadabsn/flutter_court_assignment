@@ -13,9 +13,9 @@ final ThemeData appTheme = ThemeData(
   ),
   iconTheme:  IconThemeData(color: AppColors.white),
   textTheme: TextTheme(
-    displayLarge: AppTextStyles.headline as TextStyle?,
-    displayMedium: AppTextStyles.subtitle as TextStyle?,
-    displaySmall: AppTextStyles.muted as TextStyle?,
+    headlineLarge: AppTextStyles.headline as TextStyle?,
+    titleMedium: AppTextStyles.subtitle as TextStyle?,
+    titleSmall: AppTextStyles.muted as TextStyle?,
   ),
   colorScheme: const ColorScheme.dark().copyWith(
     primary: AppColors.accent,
