@@ -1,5 +1,8 @@
-import 'package:flutter/foundation.dart';
-
+/**
+ * TimerModel class
+ * This class represents a timer with properties such as id, description, project, task, and status.
+ * TimerStatus enum defines the possible states of the timer.
+ */
 enum TimerStatus { running, paused, stopped }
 
 class TimerModel {
@@ -8,7 +11,7 @@ class TimerModel {
   final String project;
   final String task;
   final bool isFavorite;
-  final DateTime startTime;
+  DateTime? startTime;
   Duration elapsed;
   TimerStatus status;
 
@@ -18,13 +21,8 @@ class TimerModel {
     required this.project,
     required this.task,
     this.isFavorite = false,
-    required this.startTime,
+    this.startTime,
     this.elapsed = Duration.zero,
     this.status = TimerStatus.stopped,
   });
-
-  void reset() {
-    elapsed = Duration.zero;
-    status = TimerStatus.stopped;
-  }
 }
