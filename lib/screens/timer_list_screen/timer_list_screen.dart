@@ -8,7 +8,7 @@ import '../../core/utils/app_text_styles.dart';
 import '../../providers/timer_provider.dart';
 import '../../widgets/custom_bottom_navigation_bar.dart';
 import '../../widgets/gradient_scaffold.dart';
-import '../../widgets/timer_card.dart';
+import 'widgets/timer_card.dart';
 
 class TimerListScreen extends StatefulWidget {
   const TimerListScreen({super.key});

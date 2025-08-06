@@ -5,8 +5,8 @@ import 'package:test_assignment_flutter/core/config/app_responsive_config.dart';
 import 'package:test_assignment_flutter/core/utils/app_text_styles.dart';
 import 'package:test_assignment_flutter/providers/timer_provider.dart';
 
-import '../core/helpers/date_helper.dart';
-import '../models/timer_model.dart';
+import '../../../core/helpers/date_helper.dart';
+import '../../../models/timer_model.dart';
 
 class TimerCard extends StatefulWidget {
   final TimerModel timer;
