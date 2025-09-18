@@ -57,6 +57,7 @@ class _FacilityDetailsScreenState extends State<FacilityDetailsScreen> {
               onSurface: Colors.white,
             ),
           ),
+
           child: child!,
         );
       },
@@ -175,9 +176,9 @@ class _FacilityDetailsScreenState extends State<FacilityDetailsScreen> {
                               bookingProvider.selectedCourt != null) ...[
                             TimeSelectionWidget(
                               availableTimeSlots:
-                                  bookingProvider.availableTimeSlots,
+                              bookingProvider.availableTimeSlots,
                               selectedStartTime:
-                                  bookingProvider.selectedStartTime,
+                              bookingProvider.selectedStartTime,
                               onTimeSelected: _onTimeSelected,
                             ),
                             SizedBox(height: 32.h),
