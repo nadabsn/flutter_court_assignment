@@ -30,3 +30,7 @@ bin/
 
 # FVM Version Cache
 .fvm/
+
+/build/
+/*.apk
+*.apk
