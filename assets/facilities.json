@@ -1,0 +1,182 @@
+{
+  "facilities": [
+    {
+      "id": "fac_001",
+      "name": "City Sports Arena",
+      "city": "Tunis",
+      "sports": [
+        "football",
+        "padel"
+      ],
+      "thumbnail": "https://picsum.photos/seed/arena1/300/200",
+      "courts": [
+        {
+          "id": "c_f7",
+          "sport": "football",
+          "label": "Football 7s",
+          "price": 80.0,
+          "slotMinutes": 60,
+          "dailyOpen": "09:00",
+          "dailyClose": "21:00"
+        },
+        {
+          "id": "c_pA",
+          "sport": "padel",
+          "label": "Padel A",
+          "price": 60.0,
+          "slotMinutes": 60,
+          "dailyOpen": "09:00",
+          "dailyClose": "21:00"
+        }
+      ]
+    },
+    {
+      "id": "fac_002",
+      "name": "Basketball Arena",
+      "city": "Sousse",
+      "sports": [
+        "basketball",
+        "padel"
+      ],
+      "thumbnail": "https://picsum.photos/seed/arena2/300/200",
+      "courts": [
+        {
+          "id": "c_b1",
+          "sport": "basketball",
+          "label": "Basketball Court 1",
+          "price": 70.0,
+          "slotMinutes": 60,
+          "dailyOpen": "08:00",
+          "dailyClose": "22:00"
+        },
+        {
+          "id": "c_pB",
+          "sport": "padel",
+          "label": "Padel B",
+          "price": 65.0,
+          "slotMinutes": 60,
+          "dailyOpen": "08:00",
+          "dailyClose": "22:00"
+        }
+      ]
+    },
+    {
+      "id": "fac_003",
+      "name": "Olympic Tennis Club",
+      "city": "Monastir",
+      "sports": [
+        "tennis",
+        "padel"
+      ],
+      "thumbnail": "https://picsum.photos/seed/arena3/300/200",
+      "courts": [
+        {
+          "id": "c_t1",
+          "sport": "tennis",
+          "label": "Clay Court 1",
+          "price": 50.0,
+          "slotMinutes": 60,
+          "dailyOpen": "07:00",
+          "dailyClose": "20:00"
+        },
+        {
+          "id": "c_t2",
+          "sport": "tennis",
+          "label": "Hard Court 2",
+          "price": 55.0,
+          "slotMinutes": 60,
+          "dailyOpen": "07:00",
+          "dailyClose": "20:00"
+        },
+        {
+          "id": "c_pC",
+          "sport": "padel",
+          "label": "Padel C",
+          "price": 65.0,
+          "slotMinutes": 60,
+          "dailyOpen": "07:00",
+          "dailyClose": "20:00"
+        }
+      ]
+    },
+    {
+      "id": "fac_004",
+      "name": "El Menzah Aquatic Center",
+      "city": "Tunis",
+      "sports": [
+        "swimming"
+      ],
+      "thumbnail": "https://picsum.photos/seed/arena4/300/200",
+      "courts": [
+        {
+          "id": "c_sw1",
+          "sport": "swimming",
+          "label": "Olympic Pool",
+          "price": 40.0,
+          "slotMinutes": 90,
+          "dailyOpen": "06:00",
+          "dailyClose": "20:00"
+        }
+      ]
+    },
+    {
+      "id": "fac_005",
+      "name": "Beach Volley Park",
+      "city": "Hammamet",
+      "sports": [
+        "volleyball"
+      ],
+      "thumbnail": "https://picsum.photos/seed/arena5/300/200",
+      "courts": [
+        {
+          "id": "c_v1",
+          "sport": "volleyball",
+          "label": "Beach Court 1",
+          "price": 45.0,
+          "slotMinutes": 60,
+          "dailyOpen": "09:00",
+          "dailyClose": "19:00"
+        },
+        {
+          "id": "c_v2",
+          "sport": "volleyball",
+          "label": "Beach Court 2",
+          "price": 45.0,
+          "slotMinutes": 60,
+          "dailyOpen": "09:00",
+          "dailyClose": "19:00"
+        }
+      ]
+    },
+    {
+      "id": "fac_006",
+      "name": "Karting & Sports Complex",
+      "city": "Nabeul",
+      "sports": [
+        "karting",
+        "football"
+      ],
+      "thumbnail": "https://picsum.photos/seed/arena6/300/200",
+      "courts": [
+        {
+          "id": "c_k1",
+          "sport": "karting",
+          "label": "Karting Track",
+          "price": 120.0,
+          "slotMinutes": 30,
+          "dailyOpen": "10:00",
+          "dailyClose": "23:00"
+        },
+        {
+          "id": "c_f9",
+          "sport": "football",
+          "label": "Football 5s",
+          "price": 70.0,
+          "slotMinutes": 60,
+          "dailyOpen": "10:00",
+          "dailyClose": "23:00"
+        }
+      ]
+    }
+  ]
+}

@@ -1,15 +1,13 @@
 import 'package:go_router/go_router.dart';
-import 'package:test_assignment_flutter/screens/timer_screen/timer_screen.dart';
+import 'package:test_assignment_flutter/core/common/models/facility.dart';
+import 'package:test_assignment_flutter/features/bookings/screen/my_booking_screen.dart';
 
-import '../../screens/create_timer_screen/create_timer_screen.dart';
-import '../../screens/timer_list_screen/timer_list_screen.dart';
+import '../../features/facility/screen/facility_details.dart';
+import '../../features/home/screen/home_screen.dart';
 
 /**
  * AppRouter
  * This class defines the routing for the application using GoRouter.
- * It includes routes for the main timer list screen,
- * creating a new timer,
- * and viewing a specific timer by ID.
  */
 
 class AppRouter {
@@ -17,17 +15,17 @@ class AppRouter {
     initialLocation: '/',
     routes: [
       // Define the main route for the app
-      GoRoute(path: '/', builder: (context, state) => TimerListScreen()),
+      GoRoute(path: '/', builder: (context, state) => FacilitiesListScreen()),
       // Define the routes for creating a timer and viewing a specific timer
       GoRoute(
-        path: '/create',
-        builder: (context, state) => CreateTimerScreen(),
+        path: '/bookings',
+        builder: (context, state) => MyBookingsScreen(),
       ),
       GoRoute(
-        path: '/task/:id',
+        path: '/facility',
         builder: (context, state) {
-          final id = state.pathParameters['id']!;
-          return TimerScreen(timerId: id);
+          final facility = state.extra as Facility;
+          return FacilityDetailsScreen(facility: facility);
         },
       ),
     ],

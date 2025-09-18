@@ -5,7 +5,7 @@ import 'app_colors.dart';
 
 class AppTextStyles {
   static TextStyle? headline = TextStyle(
-    fontSize: 32,
+    fontSize: 32.w,
     fontWeight: FontWeight.bold,
     color: AppColors.white,
   );
