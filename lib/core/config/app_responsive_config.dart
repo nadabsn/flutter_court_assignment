@@ -12,6 +12,10 @@ class ResponsiveUiConfig {
   late double _screenWidth;
   late double _screenHeight;
 
+  /// Base design dimensions (e.g., iPhone X: 375x812)
+  static const double baseWidth = 375;
+  static const double baseHeight = 812;
+
   factory ResponsiveUiConfig() {
     return _instance;
   }
@@ -30,9 +34,9 @@ class ResponsiveUiConfig {
     _screenHeight = _mediaQueryData.size.height;
   }
 
-  double setWidth(num value) => _screenWidth * (value / 375);
+  double setWidth(num value) => _screenWidth * (value / baseWidth);
 
-  double setHeight(num value) => _screenHeight * (value / 812);
+  double setHeight(num value) => _screenHeight * (value / baseHeight);
 }
 
 extension ExtensionsOnNum on num {

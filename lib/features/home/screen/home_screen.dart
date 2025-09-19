@@ -7,7 +7,6 @@ import 'package:test_assignment_flutter/core/config/app_responsive_config.dart';
 import 'package:test_assignment_flutter/features/facility/providers/facility_provider.dart';
 import 'package:test_assignment_flutter/features/home/widgets/facility_card.dart';
 
-import '../../../core/common/models/facility.dart';
 import '../../../core/common/widgets/empty_state.dart';
 import '../../../core/helpers/snackbar_helper.dart';
 import '../../../core/utils/app_colors.dart';
@@ -21,22 +20,7 @@ class FacilitiesListScreen extends StatefulWidget {
 }
 
 class _FacilitiesListScreenState extends State<FacilitiesListScreen> {
-  List<Facility> _allFacilities = [];
-  List<Facility> _filteredFacilities = [];
-  String _searchQuery = '';
-  String? _selectedSport;
   final TextEditingController _searchController = TextEditingController();
-
-  // Available sports for filtering
-  final List<String> _availableSports = [
-    'football',
-    'padel',
-    'tennis',
-    'basketball',
-    'swimming',
-    'volleyball',
-    'karting'
-  ];
 
   @override
   void initState() {
@@ -48,11 +32,11 @@ class _FacilitiesListScreenState extends State<FacilitiesListScreen> {
 
   Future<void> _loadFacilities() async {
     try {
-      FacilityProvider facilityProvider =
-          Provider.of<FacilityProvider>(context, listen: false);
+      FacilityProvider facilityProvider = Provider.of<FacilityProvider>(
+        context,
+        listen: false,
+      );
       await facilityProvider.loadFacilities();
-      _allFacilities = facilityProvider.allFacilities;
-      _applyFilters();
     } catch (e) {
       if (!mounted) return;
       CustomSnackbar.show(
@@ -63,149 +47,152 @@ class _FacilitiesListScreenState extends State<FacilitiesListScreen> {
     }
   }
 
-  void _applyFilters() {
-    setState(() {
-      _filteredFacilities = _allFacilities.where((facility) {
-        // Text search filter
-        bool matchesSearch = _searchQuery.isEmpty ||
-            facility.name.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-            facility.city.toLowerCase().contains(_searchQuery.toLowerCase());
-
-        // Sport filter
-        bool matchesSport =
-            _selectedSport == null || facility.sports.contains(_selectedSport);
-
-        return matchesSearch && matchesSport;
-      }).toList();
-    });
-  }
-
   void _onSearchChanged(String query) {
-    _searchQuery = query;
-    _applyFilters();
+    Provider.of<FacilityProvider>(
+      context,
+      listen: false,
+    ).searchFacilities(query);
   }
 
   void _onSportFilterChanged(String? sport) {
-    _selectedSport = sport;
-    _applyFilters();
+    Provider.of<FacilityProvider>(context, listen: false).filterBySport(sport);
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<FacilityProvider>(
-        builder: (context, facilityProvider, child) {
-      return ModalProgressHUD(
-        inAsyncCall: facilityProvider.isLoading,
-        blur: 5,
-        progressIndicator: const CustomLoader(),
-        child: Scaffold(
-          body: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [AppColors.gradientBgStart, AppColors.gradientBgEnd],
+      builder: (context, facilityProvider, child) {
+        return ModalProgressHUD(
+          inAsyncCall: facilityProvider.isLoading,
+          blur: 5,
+          progressIndicator: const CustomLoader(),
+          child: Scaffold(
+            body: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [AppColors.gradientBgStart, AppColors.gradientBgEnd],
+                ),
               ),
-            ),
-            child: SafeArea(
-              child: Column(
-                children: [
-                  // Header
-                  Padding(
-                    padding: EdgeInsets.all(20.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('CourtBook', style: AppTextStyles.headline),
-                        SizedBox(height: 8.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('Find your perfect court',
-                                style: AppTextStyles.muted),
-                            GestureDetector(
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  context.push('/bookings');
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.accent,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 12.w, vertical: 8.h),
-                                ),
-                                child: Text('Bookings',
-                                    style: AppTextStyles.smallText),
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(height: 20.h),
-
-                        // Search Bar
-                        Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.card,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: TextField(
-                            controller: _searchController,
-                            onChanged: _onSearchChanged,
-                            style: AppTextStyles.subtitle,
-                            decoration: InputDecoration(
-                              hintText: 'Search facilities...',
-                              hintStyle: AppTextStyles.muted,
-                              prefixIcon: const Icon(Icons.search,
-                                  color: AppColors.mutedWhite),
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.all(16.w),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16.h),
-
-                        // Sport Filter Chips
-                        SizedBox(
-                          height: 40.h,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
+              child: SafeArea(
+                child: Column(
+                  children: [
+                    // Header
+                    Padding(
+                      padding: EdgeInsets.all(20.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('CourtBook', style: AppTextStyles.headline),
+                          SizedBox(height: 8.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              _buildFilterChip('All Sports', null),
-                              ..._availableSports
-                                  .map((sport) => _buildFilterChip(
-                                        sport.toUpperCase(),
-                                        sport,
-                                      )),
+                              Text(
+                                'Find your perfect court',
+                                style: AppTextStyles.muted,
+                              ),
+                              GestureDetector(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    context.push('/bookings');
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.accent,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 12.w,
+                                      vertical: 8.h,
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Bookings',
+                                    style: AppTextStyles.smallText,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
+                          SizedBox(height: 20.h),
 
-                  // Content
-                  Expanded(
-                    child: _filteredFacilities.isEmpty &&
-                            !facilityProvider.isLoading
-                        ? EmptyState(
-                            title: "No courts available",
-                            subtitle: "Please check back later",
-                          )
-                        : _buildFacilitiesList(),
-                  ),
-                ],
+                          // Search Bar
+                          Container(
+                            decoration: BoxDecoration(
+                              color: AppColors.card,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: TextField(
+                              controller: _searchController,
+                              onChanged: _onSearchChanged,
+                              style: AppTextStyles.subtitle,
+                              decoration: InputDecoration(
+                                hintText: 'Search facilities...',
+                                hintStyle: AppTextStyles.muted,
+                                prefixIcon: const Icon(
+                                  Icons.search,
+                                  color: AppColors.mutedWhite,
+                                ),
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.all(16.w),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 16.h),
+
+                          // Sport Filter Chips
+                          SizedBox(
+                            height: 40.h,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                _buildFilterChip(
+                                  'All Sports',
+                                  null,
+                                  facilityProvider,
+                                ),
+                                ...facilityProvider.availableSports.map(
+                                  (sport) => _buildFilterChip(
+                                    sport.toUpperCase(),
+                                    sport,
+                                    facilityProvider,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    // Content
+                    Expanded(
+                      child:
+                          facilityProvider.isEmpty
+                              ? EmptyState(
+                                title: "No courts available",
+                                subtitle: "Please check back later",
+                              )
+                              : _buildFacilitiesList(facilityProvider),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
-  Widget _buildFilterChip(String label, String? value) {
-    final isSelected = _selectedSport == value;
+  Widget _buildFilterChip(
+    String label,
+    String? value,
+    FacilityProvider facilityProvider,
+  ) {
+    final isSelected = facilityProvider.selectedSport == value;
     return Container(
       margin: EdgeInsets.only(right: 8.w),
       child: FilterChip(
@@ -224,16 +211,21 @@ class _FacilitiesListScreenState extends State<FacilitiesListScreen> {
     );
   }
 
-  Widget _buildFacilitiesList() {
+  Widget _buildFacilitiesList(FacilityProvider facilityProvider) {
     return RefreshIndicator(
-      onRefresh: _loadFacilities,
+      onRefresh:
+          () =>
+              Provider.of<FacilityProvider>(
+                context,
+                listen: false,
+              ).refreshFacilities(),
       color: AppColors.accent,
       backgroundColor: AppColors.card,
       child: ListView.builder(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
-        itemCount: _filteredFacilities.length,
+        itemCount: facilityProvider.facilities.length,
         itemBuilder: (context, index) {
-          return FacilityCard(facility: _filteredFacilities[index]);
+          return FacilityCard(facility: facilityProvider.facilities[index]);
         },
       ),
     );

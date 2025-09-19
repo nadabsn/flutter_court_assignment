@@ -18,21 +18,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ResponsiveUiConfig().initialize(context);
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => FacilityProvider(FacilityService()),
+    return Builder(builder: (context) {
+      ResponsiveUiConfig().initialize(context);
+      return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => FacilityProvider(FacilityService()),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => BookingProvider(BookingService()),
+          ),
+        ],
+        child: MaterialApp.router(
+          routerConfig: AppRouter.router,
+          debugShowCheckedModeBanner: false,
+          theme: appTheme,
         ),
-        ChangeNotifierProvider(
-          create: (context) => BookingProvider(BookingService()),
-        ),
-      ],
-      child: MaterialApp.router(
-        routerConfig: AppRouter.router,
-        debugShowCheckedModeBanner: false,
-        theme: appTheme,
-      ),
-    );
+      );
+    });
   }
 }

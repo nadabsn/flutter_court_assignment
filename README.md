@@ -131,53 +131,11 @@ return true; // Conflict detected
 
 If given more time, the following enhancements would be implemented:
 
-### 1. **Pagination**
-
-- Implement infinite scroll for facility listings
-- Add pagination for booking history
-- Optimize performance for large datasets
-
-### 2. **Calendar View**
-
-- Monthly/weekly calendar interface for date selection
-- Visual booking display on calendar
-- Quick navigation between dates
-
-### 3. **Real API Integration**
-
-- Replace JSON assets with REST API calls
-- Implement proper authentication
-- Add real-time booking updates via WebSocket
-
-### 4. **Multi-day Search**
-
-- Allow users to search for available slots across multiple days
-- Show availability heatmap
-- Batch booking capabilities
-
-### 5. **Enhanced Features**
-
-- **Push Notifications**: Booking reminders and confirmations
-- **Payment Integration**: Stripe/PayPal for online payments
-- **User Profiles**: Personal booking history and preferences
-- **Reviews & Ratings**: Facility and court reviews
-- **Advanced Filtering**: Price range, distance, amenities
-- **Offline Support**: Cache data for offline booking viewing
-- **Multi-language**: Internationalization support
-
-### 6. **Performance Optimizations**
-
-- **Database Migration**: Move from SharedPreferences to SQLite/Hive
-- **Image Caching**: Implement proper image loading and caching
-- **State Persistence**: Save app state across sessions
-- **Code Splitting**: Lazy loading for better startup performance
-
-### 7. **Testing & Quality**
-
 - Unit tests for business logic
 - Widget tests for UI components
 - Integration tests for booking flow
 - Performance testing and optimization
+-
 
 ---
 
@@ -202,6 +160,6 @@ The app follows Flutter best practices with:
 
 - Feature-based folder organization
 - Separation of concerns (UI, business logic, data)
-- Reusable components and utilities
+- Reusable widgets and utilities
 - Consistent naming conventions
 - Responsive design implementation
