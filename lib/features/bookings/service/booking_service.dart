@@ -2,14 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-import '../../../core/common/models/booking.dart';
 import '../../../core/helpers/date_helper.dart';
 import '../../../core/services/storage_service.dart';
+import '../models/booking.dart';
 
 class BookingService {
   static const String _bookingsKey = 'saved_bookings';
   final LocalStorageService _localStorage = LocalStorageService();
-
 
   /// Save a new booking to shared preferences
   Future<void> saveBooking(Booking booking) async {
@@ -47,15 +46,15 @@ class BookingService {
   }
 
   /// Get bookings for a specific facility, court, and date
-  Future<List<Booking>> getBookingsForCourtAndDate(String facilityId,
-      String courtId, DateTime date) async {
+  Future<List<Booking>> getBookingsForCourtAndDate(
+      String facilityId, String courtId, DateTime date) async {
     final allBookings = await getBookings();
 
     return allBookings
         .where((booking) =>
-    booking.facilityId == facilityId &&
-        booking.courtId == courtId &&
-        isSameDay(booking.date, date))
+            booking.facilityId == facilityId &&
+            booking.courtId == courtId &&
+            isSameDay(booking.date, date))
         .toList();
   }
 
@@ -67,7 +66,7 @@ class BookingService {
       bookings.removeWhere((booking) => booking.id == bookingId);
 
       final List<String> bookingsJson =
-      bookings.map((booking) => json.encode(booking.toJson())).toList();
+          bookings.map((booking) => json.encode(booking.toJson())).toList();
 
       await _localStorage.setBookings(bookingsJson);
     } catch (e) {
@@ -84,7 +83,7 @@ class BookingService {
     required int slotMinutes,
   }) async {
     final existingBookings =
-    await getBookingsForCourtAndDate(facilityId, courtId, date);
+        await getBookingsForCourtAndDate(facilityId, courtId, date);
 
     final startMinutes = startTime.hour * 60 + startTime.minute;
     final endMinutes = startMinutes + slotMinutes;

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../../../core/common/models/facility.dart';
+import '../models/facility.dart';
 import '../service/facility_service.dart';
 
 class FacilityProvider extends ChangeNotifier {
@@ -94,23 +94,20 @@ class FacilityProvider extends ChangeNotifier {
 
   // Private methods
   void _applyFilters() {
-    _filteredFacilities =
-        _allFacilities.where((facility) {
-          // Text search filter
-          bool matchesSearch =
-              _searchQuery.isEmpty ||
-              facility.name.toLowerCase().contains(
+    _filteredFacilities = _allFacilities.where((facility) {
+      // Text search filter
+      bool matchesSearch = _searchQuery.isEmpty ||
+          facility.name.toLowerCase().contains(
                 _searchQuery.toLowerCase(),
               ) ||
-              facility.city.toLowerCase().contains(_searchQuery.toLowerCase());
+          facility.city.toLowerCase().contains(_searchQuery.toLowerCase());
 
-          // Sport filter
-          bool matchesSport =
-              _selectedSport == null ||
-              facility.sports.contains(_selectedSport);
+      // Sport filter
+      bool matchesSport =
+          _selectedSport == null || facility.sports.contains(_selectedSport);
 
-          return matchesSearch && matchesSport;
-        }).toList();
+      return matchesSearch && matchesSport;
+    }).toList();
 
     notifyListeners();
   }

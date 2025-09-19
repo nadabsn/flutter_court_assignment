@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
-import 'package:test_assignment_flutter/core/common/models/booking.dart';
 import 'package:test_assignment_flutter/core/config/app_responsive_config.dart';
 import 'package:test_assignment_flutter/core/utils/app_colors.dart';
+import 'package:test_assignment_flutter/features/bookings/models/booking.dart';
 
 import '../../../core/common/widgets/custom_loader.dart';
 import '../../../core/common/widgets/empty_state.dart';

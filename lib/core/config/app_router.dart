@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:test_assignment_flutter/core/common/models/facility.dart';
 import 'package:test_assignment_flutter/features/bookings/screen/my_booking_screen.dart';
+import 'package:test_assignment_flutter/features/facility/models/facility.dart';
 
 import '../../features/facility/screen/facility_details.dart';
 import '../../features/home/screen/home_screen.dart';

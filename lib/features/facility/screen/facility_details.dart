@@ -3,11 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:test_assignment_flutter/core/common/widgets/custom_loader.dart';
 
-import '../../../core/common/models/court.dart';
-import '../../../core/common/models/facility.dart';
 import '../../../core/config/app_responsive_config.dart';
 import '../../../core/utils/app_colors.dart';
+import '../../bookings/models/court.dart';
 import '../../bookings/providers/booking_provider.dart';
+import '../models/facility.dart';
 import '../widgets/booking_summary_widget.dart';
 import '../widgets/courts_section_widget.dart';
 import '../widgets/date_selection_widget.dart';

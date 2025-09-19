@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:test_assignment_flutter/core/common/models/court.dart';
 import 'package:test_assignment_flutter/core/config/app_responsive_config.dart';
 import 'package:test_assignment_flutter/core/utils/app_colors.dart';
 import 'package:test_assignment_flutter/core/utils/app_text_styles.dart';
+
+import '../../bookings/models/court.dart';
 
 class CourtsSectionWidget extends StatelessWidget {
   final List<Court> courts;

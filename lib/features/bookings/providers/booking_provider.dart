@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/common/models/booking.dart';
-import '../../../core/common/models/court.dart';
-import '../../../core/common/models/facility.dart';
+import '../../facility/models/facility.dart';
+import '../models/booking.dart';
+import '../models/court.dart';
 import '../service/booking_service.dart';
 
 class BookingProvider extends ChangeNotifier {

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import '../../../core/common/models/facility.dart';
+import '../models/facility.dart';
 
 class FacilityService {
   static const String _facilitiesPath = 'assets/facilities.json';

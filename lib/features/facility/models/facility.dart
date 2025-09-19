@@ -1,4 +1,4 @@
-import 'court.dart';
+import '../../bookings/models/court.dart';
 
 class Facility {
   final String id;
