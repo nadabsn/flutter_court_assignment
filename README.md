@@ -17,9 +17,11 @@ The app follows a clean architecture pattern with feature-based organization:
 
 ```
 lib/
-├── core/                    # Shared utilities and configuration
+├── core/                   # Shared utilities and configuration
 │   ├── common/             # Models and widgets
-│   ├── config/             # App router, theme, responsive config
+│   ├── config/              # App router, theme, responsive config
+│   ├── errors/             # handling exceptions
+│   ├── services/           # Network service, storage service
 │   ├── helpers/            # Date helpers, snackbar helpers
 │   └── utils/              # Colors, text styles, strings
 ├── features/               # Feature modules
