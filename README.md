@@ -2,6 +2,7 @@
 
 A Flutter application for booking sports facilities and courts. Users can browse facilities, select
 courts, choose time slots, and manage their bookings.
+This mini project took me almost 16 hours
 
 ## How to Run
 
