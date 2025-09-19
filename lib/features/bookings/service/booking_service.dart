@@ -1,19 +1,19 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/common/models/booking.dart';
 import '../../../core/helpers/date_helper.dart';
+import '../../../core/services/storage_service.dart';
 
 class BookingService {
   static const String _bookingsKey = 'saved_bookings';
+  final LocalStorageService _localStorage = LocalStorageService();
+
 
   /// Save a new booking to shared preferences
   Future<void> saveBooking(Booking booking) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-
       final List<Booking> existingBookings = await getBookings();
 
       existingBookings.add(booking);
@@ -22,7 +22,7 @@ class BookingService {
           .map((booking) => json.encode(booking.toJson()))
           .toList();
 
-      await prefs.setStringList(_bookingsKey, bookingsJson);
+      await _localStorage.setBookings(bookingsJson);
     } catch (e) {
       throw Exception('Failed to save booking: $e');
     }
@@ -31,9 +31,7 @@ class BookingService {
   /// Get all bookings from shared preferences
   Future<List<Booking>> getBookings() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-
-      final List<String>? bookingsJson = prefs.getStringList(_bookingsKey);
+      final List<String>? bookingsJson = await _localStorage.getBookings();
 
       if (bookingsJson == null || bookingsJson.isEmpty) {
         return [];
@@ -64,7 +62,6 @@ class BookingService {
   /// Delete a booking by ID
   Future<void> deleteBooking(String bookingId) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
       final List<Booking> bookings = await getBookings();
 
       bookings.removeWhere((booking) => booking.id == bookingId);
@@ -72,7 +69,7 @@ class BookingService {
       final List<String> bookingsJson =
       bookings.map((booking) => json.encode(booking.toJson())).toList();
 
-      await prefs.setStringList(_bookingsKey, bookingsJson);
+      await _localStorage.setBookings(bookingsJson);
     } catch (e) {
       throw Exception('Failed to delete booking: $e');
     }

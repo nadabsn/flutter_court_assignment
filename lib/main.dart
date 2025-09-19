@@ -5,6 +5,7 @@ import 'package:test_assignment_flutter/features/bookings/service/booking_servic
 import 'core/config/app_responsive_config.dart';
 import 'core/config/app_router.dart';
 import 'core/config/app_theme.dart';
+import 'core/services/storage_service.dart';
 import 'features/bookings/providers/booking_provider.dart';
 import 'features/facility/providers/facility_provider.dart';
 import 'features/facility/service/facility_service.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
+      LocalStorageService().init;
       ResponsiveUiConfig().initialize(context);
       return MultiProvider(
         providers: [
