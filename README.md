@@ -23,7 +23,7 @@ The app follows a clean architecture pattern with feature-based organization:
 ```
 lib/
 ├── core/                   # Shared utilities and configuration
-│   ├── common/             # Models and widgets
+│   ├── common/             # enums, widgets ..
 │   ├── config/              # App router, theme, responsive config
 │   ├── errors/             # handling exceptions
 │   ├── services/           # Network service, storage service
