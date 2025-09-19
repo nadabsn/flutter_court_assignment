@@ -11,6 +11,10 @@ courts, choose time slots, and manage their bookings.
 2. **Run the app:**
    "flutter run"
 
+# Demo
+
+![App Demo](demo.gif)
+
 ## Architecture Overview
 
 The app follows a clean architecture pattern with feature-based organization:
