@@ -11,6 +11,8 @@ class BookingProvider extends ChangeNotifier {
   BookingProvider(this._bookingService);
 
   // State
+  String _selectedFacilityId = '';
+  List<TimeOfDay> _allTimeSlots = [];
   Court? _selectedCourt;
   DateTime? _selectedDate;
   TimeOfDay? _selectedStartTime;
@@ -22,6 +24,10 @@ class BookingProvider extends ChangeNotifier {
   List<Booking> _userBookings = [];
 
   // Getters
+  List<TimeOfDay> get allTimeSlots => _allTimeSlots;
+
+  String? get selectedFacilityId => _selectedFacilityId;
+
   Court? get selectedCourt => _selectedCourt;
 
   DateTime? get selectedDate => _selectedDate;
@@ -46,12 +52,11 @@ class BookingProvider extends ChangeNotifier {
       _selectedStartTime != null &&
       !_isCreatingBooking;
 
-  // Public methods
-
   /// Initialize booking data for a facility
   Future<void> initializeForFacility(String facilityId) async {
     _isLoading = true;
     _errorMessage = '';
+    _selectedFacilityId = facilityId;
     notifyListeners();
 
     try {
@@ -113,10 +118,15 @@ class BookingProvider extends ChangeNotifier {
 
     try {
       _availableTimeSlots = await _bookingService.getAvailableTimeSlots(
-        facilityId: _selectedCourt!.id,
-        // Assuming court has facility ID, or pass it separately
+        facilityId: _selectedFacilityId,
         courtId: _selectedCourt!.id,
         date: _selectedDate!,
+        dailyOpen: _selectedCourt!.dailyOpen,
+        dailyClose: _selectedCourt!.dailyClose,
+        slotMinutes: _selectedCourt!.slotMinutes,
+      );
+      // Time slots for display purposes
+      _allTimeSlots = _bookingService.getAllTimeSlots(
         dailyOpen: _selectedCourt!.dailyOpen,
         dailyClose: _selectedCourt!.dailyClose,
         slotMinutes: _selectedCourt!.slotMinutes,
@@ -226,11 +236,6 @@ class BookingProvider extends ChangeNotifier {
   void clearError() {
     _errorMessage = '';
     notifyListeners();
-  }
-
-  /// Refresh booking data
-  Future<void> refreshBookings(String facilityId) async {
-    await initializeForFacility(facilityId);
   }
 
   /// Check if a time slot is available

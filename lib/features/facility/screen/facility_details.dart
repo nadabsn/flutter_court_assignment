@@ -57,7 +57,6 @@ class _FacilityDetailsScreenState extends State<FacilityDetailsScreen> {
               onSurface: Colors.white,
             ),
           ),
-
           child: child!,
         );
       },
@@ -175,10 +174,11 @@ class _FacilityDetailsScreenState extends State<FacilityDetailsScreen> {
                           if (bookingProvider.selectedDate != null &&
                               bookingProvider.selectedCourt != null) ...[
                             TimeSelectionWidget(
+                              allTimeSlots: bookingProvider.allTimeSlots,
                               availableTimeSlots:
-                              bookingProvider.availableTimeSlots,
+                                  bookingProvider.availableTimeSlots,
                               selectedStartTime:
-                              bookingProvider.selectedStartTime,
+                                  bookingProvider.selectedStartTime,
                               onTimeSelected: _onTimeSelected,
                             ),
                             SizedBox(height: 32.h),
@@ -240,7 +240,8 @@ class _FacilityDetailsScreenState extends State<FacilityDetailsScreen> {
             ),
             SizedBox(height: 24.h),
             ElevatedButton(
-              onPressed: () => provider.refreshBookings(widget.facility.id),
+              onPressed: () =>
+                  provider.initializeForFacility(widget.facility.id),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.accent,
                 foregroundColor: AppColors.background,

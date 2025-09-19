@@ -22,7 +22,6 @@ class BookingService {
           .map((booking) => json.encode(booking.toJson()))
           .toList();
 
-
       await prefs.setStringList(_bookingsKey, bookingsJson);
     } catch (e) {
       throw Exception('Failed to save booking: $e');
@@ -49,21 +48,11 @@ class BookingService {
     }
   }
 
-
-/*
-  /// Get bookings for a specific date
-  Future<List<Booking>> getBookingsForDate(DateTime date) async {
-    final allBookings = await getBookings();
-    return allBookings
-        .where((booking) => _isSameDay(booking.date, date))
-        .toList();
-  }
-*/
-
   /// Get bookings for a specific facility, court, and date
   Future<List<Booking>> getBookingsForCourtAndDate(String facilityId,
       String courtId, DateTime date) async {
     final allBookings = await getBookings();
+
     return allBookings
         .where((booking) =>
     booking.facilityId == facilityId &&
@@ -89,7 +78,6 @@ class BookingService {
     }
   }
 
-
   /// Check if a time slot conflicts with existing bookings
   Future<bool> hasTimeSlotConflict({
     required String facilityId,
@@ -97,7 +85,6 @@ class BookingService {
     required DateTime date,
     required TimeOfDay startTime,
     required int slotMinutes,
-    String? excludeBookingId, // For updates, exclude the booking being updated
   }) async {
     final existingBookings =
     await getBookingsForCourtAndDate(facilityId, courtId, date);
@@ -106,11 +93,6 @@ class BookingService {
     final endMinutes = startMinutes + slotMinutes;
 
     for (final booking in existingBookings) {
-      // Skip if this is the booking being updated
-      if (excludeBookingId != null && booking.id == excludeBookingId) {
-        continue;
-      }
-
       final bookingStartMinutes =
           booking.startTime.hour * 60 + booking.startTime.minute;
       final bookingEndMinutes =
@@ -139,7 +121,6 @@ class BookingService {
     final closeTime = parseTime(dailyClose);
 
     List<TimeOfDay> allSlots = [];
-
     // Generate 30-minute intervals from open to close
     int currentMinutes = openTime.hour * 60 + openTime.minute;
     final closeMinutes = closeTime.hour * 60 + closeTime.minute;
@@ -166,6 +147,9 @@ class BookingService {
         );
         if (!hasConflict) {
           availableSlots.add(slot);
+        } else {
+          //
+          print("Slot $slot has conflict, skipping");
         }
       } catch (e) {
         continue; // Skip this slot on error
@@ -174,5 +158,27 @@ class BookingService {
     return availableSlots;
   }
 
+  List<TimeOfDay> getAllTimeSlots({
+    required String dailyOpen,
+    required String dailyClose,
+    required int slotMinutes,
+  }) {
+    final openTime = parseTime(dailyOpen);
+    final closeTime = parseTime(dailyClose);
 
+    List<TimeOfDay> allSlots = [];
+
+    int currentMinutes = openTime.hour * 60 + openTime.minute;
+    final closeMinutes = closeTime.hour * 60 + closeTime.minute;
+
+    while (currentMinutes + slotMinutes <= closeMinutes) {
+      allSlots.add(TimeOfDay(
+        hour: currentMinutes ~/ 60,
+        minute: currentMinutes % 60,
+      ));
+      currentMinutes += 30; // 30-minute grid
+    }
+
+    return allSlots;
+  }
 }
