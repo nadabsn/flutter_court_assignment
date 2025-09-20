@@ -12,6 +12,10 @@ This mini project took me almost 16 hours
 2. **Run the app:**
    "flutter run"
 
+## How to test
+  you can see the coverage inside coverage/html/index.html
+  run command : "flutter test"
+
 # Demo
 
 ![App Demo](demo.gif)
@@ -33,6 +37,7 @@ lib/
 │   ├── home/               # Home screen and facility listing
 │   ├── facility/           # Facility details and booking flow
 │   └── bookings/           # Booking management
+├── test/                   # some unit tests
 └── main.dart               # App entry point
 ```
 
@@ -138,11 +143,11 @@ return true; // Conflict detected
 
 If given more time, the following enhancements would be implemented:
 
-- Unit tests for business logic
+- More unit tests for business logic
 - Widget tests for UI components
 - Integration tests for booking flow
 - Performance testing and optimization
--
+
 
 ---
 
